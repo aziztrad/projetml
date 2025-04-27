@@ -1,19 +1,85 @@
-# FraudGuard - Spring 2025
+# Projet : Détection de Fraude Bancaire avec FraudGuard
 
-## 📝 Overview
-
-This project implements a machine learning pipeline for credit card fraud detection, featuring a **Flask API** and a **Streamlit app** for user interaction. The project is fully automated using GitHub Actions.
+Ce projet a pour objectif de démontrer un flux de travail complet (end-to-end) pour l'entraînement, le déploiement et l'utilisation d'un système de détection de fraude bancaire basé sur le Machine Learning. Il inclut la gestion des données, l'entraînement de plusieurs modèles, le déploiement d'une API Flask, une interface utilisateur Streamlit, et des fonctionnalités de base de données et d'authentification.
 
 ---
 
-## 🚀 Deployed Applications
+## 📝 Présentation générale
 
-- **API on Render**: [https://ml-project-api.onrender.com](https://ml-project-api.onrender.com)
-- **Streamlit App**: [https://ml-project25.streamlit.app](https://ml-project25.streamlit.app)
+FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset creditcard.csv. Le projet est découpé en plusieurs modules :
+- **Préparation et gestion des données**
+- **Entraînement et sauvegarde de modèles ML**
+- **Déploiement d'une API Flask pour la prédiction**
+- **Interface utilisateur Streamlit**
+- **Base de données et authentification**
+- **Automatisation CI/CD avec GitHub Actions**
 
 ---
 
-## 🗂 Project Structure
+## 1️⃣ Prérequis
+
+- **Python 3.9** (recommandé)
+- **Git**
+- **Anaconda** (optionnel, pour la gestion d'environnement)
+- Comptes sur [GitHub](https://github.com), [Render](https://render.com), et [Streamlit Cloud](https://share.streamlit.io)
+
+### Installation des dépendances
+
+Crée un fichier `requirements.txt` avec les packages nécessaires :
+
+```
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+joblib
+streamlit
+Flask
+```
+
+---
+
+## 2️⃣ Mise en place de l'environnement
+
+1. **Créer un environnement virtuel**
+   ```bash
+   python -m venv venv
+   # Windows :
+   venv\Scripts\activate
+   # Mac/Linux :
+   source venv/bin/activate
+   ```
+2. **Installer les dépendances**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+---
+
+## 3️⃣ Initialisation du projet Git
+
+1. **Initialiser le dépôt**
+   ```bash
+   git init
+   git config --global user.name "votre-nom"
+   git config --global user.email "votre-email@example.com"
+   ```
+2. **Ajouter les fichiers et faire un premier commit**
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   ```
+3. **Créer un dépôt GitHub et lier le dépôt local**
+   ```bash
+   git remote add origin https://github.com/votre-username/fraudguard.git
+   git branch -M main
+   git push -u origin main
+   ```
+
+---
+
+## 4️⃣ Structure du projet
 
 ```file.txt
 fraudguard/
@@ -23,16 +89,14 @@ fraudguard/
 │   ├── confusion_matrix_KNN.png
 │   ├── confusion_matrix_LinearSVC.png
 │   ├── confusion_matrix_LogisticRegression.png
-│   ├── feature_importance_LinearSVC.png
-│   ├── feature_importance_LogisticRegression.png
 │   ├── knn.pkl
 │   ├── linearsvc.pkl
 │   ├── logisticregression.pkl
 │   ├── scaler.pkl
 │   └── train_model.py
-├── app.py
-├── api.py
-├── database.py
+├── app.py                # Interface Streamlit
+├── api.py                # API Flask
+├── database.py           # Gestion base de données utilisateurs
 ├── requirements.txt
 ├── README.md
 └── ...
@@ -40,112 +104,76 @@ fraudguard/
 
 ---
 
-## ⚙️ Quickstart: Setup & Installation
+## 5️⃣ Gestion des données et base de données
 
-1. **Clone le dépôt et place-toi dans le dossier :**
-   ```bash
-   git clone https://github.com/your-username/your-repo.git
-   cd your-repo
-   ```
-2. **Crée un environnement virtuel et active-le :**
-   ```bash
-   python -m venv venv
-   # Sous Windows :
-   venv\Scripts\activate
-   # Sous Mac/Linux :
-   source venv/bin/activate
-   ```
-3. **Installe les dépendances :**
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. **Entraîne les modèles (génère les fichiers .pkl) :**
-   ```bash
-   python model/train_model.py
-   ```
-5. **Lance l'API Flask en local :**
-   ```bash
-   python api.py
-   ```
-6. **Lance l'application Streamlit en local :**
-   ```bash
-   streamlit run app.py
-   ```
+- **Dataset** : Le fichier `creditcard.csv` contient les transactions à analyser.
+- **Prétraitement** : Les données sont normalisées (StandardScaler), la colonne cible est `Class` (0 = normale, 1 = fraude).
+- **Base de données utilisateurs** : Le fichier `database.py` gère l'authentification et la gestion des utilisateurs (hashage des mots de passe, vérification, etc.).
 
 ---
 
-## 🚀 Déploiement (Production)
+## 6️⃣ Authentification
 
-### Déployer l'API sur Render
-1. Crée un compte sur [Render](https://render.com/) et connecte ton repo GitHub.
-2. Crée un nouveau **Web Service** et configure :
-   - **Build Command** : `pip install -r requirements.txt`
-   - **Start Command** : `python api.py`
-3. Déploie le service. L'URL de l'API sera affichée sur Render.
-
-### Déployer l'app Streamlit
-1. Va sur [Streamlit Cloud](https://share.streamlit.io/) et connecte ton repo GitHub.
-2. Indique le chemin du fichier Streamlit (`app.py`).
-3. Lance le déploiement. L'URL de l'app sera générée automatiquement.
+- Authentification par nom d'utilisateur et mot de passe.
+- Les mots de passe sont stockés de façon sécurisée (hashés).
+- L'accès à certaines fonctionnalités peut être restreint aux utilisateurs authentifiés.
 
 ---
 
-## 🤖 Automatisation CI/CD avec GitHub Actions
+## 7️⃣ Entraînement des modèles (model/train_model.py)
 
-Le pipeline CI/CD automatise :
-- L'entraînement et la sauvegarde des modèles (`train_model.py`)
-- Le commit automatique des modèles générés dans le repo
-- Le déclenchement du déploiement API sur Render
+Le script `train_model.py` permet d'entraîner plusieurs modèles de classification :
+- **Chargement et prétraitement des données**
+- **Division en train/test**
+- **Entraînement de trois modèles** :
+  - Régression logistique (LogisticRegression)
+  - SVM linéaire (LinearSVC)
+  - K-Nearest Neighbors (KNN)
+- **Évaluation et sauvegarde des modèles** (`.pkl`)
+- **Génération des matrices de confusion**
 
-**Extrait du workflow `.github/workflows/ci_cd.yml` :**
-
-```yaml
-name: CI/CD Pipeline
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
-jobs:
-  train-and-commit-models:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-      - run: pip install -r requirements.txt
-      - run: python model/train_model.py
-      - name: Commit models
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add model/*.pkl
-          git commit -m "Update models via CI" || echo "No changes to commit"
-          git push || echo "No changes to push"
-
-  deploy-api:
-    needs: train-and-commit-models
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.9'
-      - run: pip install requests
-      - name: Trigger Render Deploy
-        run: |
-          SERVICE_ID="${{ secrets.RENDER_SERVICE_ID }}"
-          API_TOKEN="${{ secrets.RENDER_TOKEN }}"
-          curl -s -X POST \
-            -H "Authorization: Bearer $API_TOKEN" \
-            -H "Accept: application/json" \
-            -H "Content-Type: application/json" \
-            -d '{"clearCache": "do_not_clear"}' \
-            "https://api.render.com/v1/services/$SERVICE_ID/deploys"
+Pour lancer l'entraînement :
+```bash
+python model/train_model.py
 ```
+
+---
+
+## 8️⃣ Déploiement de l'API Flask (api.py)
+
+- **Chargement des modèles sauvegardés**
+- **Endpoint `/predict`** : reçoit des données de transaction, retourne la prédiction (fraude ou non)
+- **Gestion des erreurs et validation des entrées**
+- **Sécurité** : possibilité de restreindre l'accès à l'API via authentification
+
+Pour lancer l'API en local :
+```bash
+python api.py
+```
+L'API sera disponible sur `http://127.0.0.1:5000`.
+
+---
+
+## 9️⃣ Interface utilisateur avec Streamlit (app.py)
+
+- **Connexion utilisateur** (authentification)
+- **Formulaire de saisie ou upload de transaction**
+- **Sélection du modèle à utiliser**
+- **Affichage du résultat de la prédiction**
+- **Visualisation des statistiques et matrices de confusion**
+
+Pour lancer l'interface Streamlit :
+```bash
+streamlit run app.py
+```
+
+---
+
+## 🔟 Automatisation CI/CD avec GitHub Actions
+
+- **Automatisation de l'entraînement et du commit des modèles**
+- **Déclenchement du déploiement API sur Render**
+- **Fichier de workflow `.github/workflows/ci_cd.yml`**
 
 ---
 
@@ -165,8 +193,6 @@ jobs:
 
 ## 🏗️ Architecture du projet
 
-L'architecture globale du projet est illustrée ci-dessous. Ce schéma Mermaid est **directement interprété par GitHub** :
-
 ```mermaid
 flowchart TD
     A[Dataset CSV: creditcard.csv] --> B[Pretraitement_et_Scaling_StandardScaler]
@@ -183,38 +209,24 @@ flowchart TD
 
 ---
 
-## 📄 Additional Documentation
+## 📄 Documentation complémentaire
 
-### Key Files
-
-* **`model/train_model.py`** : Script to train and save models.
-* **`api.py`** : Flask API code.
-* **`app.py`** : Streamlit app code.
-* **`requirements.txt`** : Dependencies for the local environment.
+- **`model/train_model.py`** : Script d'entraînement et de sauvegarde des modèles.
+- **`api.py`** : Code de l'API Flask.
+- **`app.py`** : Code de l'application Streamlit.
+- **`database.py`** : Gestion des utilisateurs et de l'authentification.
+- **`requirements.txt`** : Dépendances du projet.
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 Remerciements
 
-* **Render** for hosting the API.
-* **Streamlit Sharing** for hosting the Streamlit app.
-* **GitHub Actions** for automating the CI/CD pipeline.
+- **Render** pour l'hébergement de l'API.
+- **Streamlit Cloud** pour l'hébergement de l'app.
+- **GitHub Actions** pour l'automatisation CI/CD.
 
 ---
 
 ## 📧 Contact
 
-For questions or feedback, contact me at [your-email@example.com](mailto:your-email@example.com).
-
----
-
-### **How to Use This File**
-
-1. Copy this content into a file named `README.md` in the root of your repository.
-2. Replace placeholders (e.g., `your-username`, `your-repo`, `your-api-url.onrender.com`) with the appropriate values.
-3. Push the file to your GitHub repository:
-   ```bash
-   git add README.md
-   git commit -m "Add final project documentation"
-   git push origin main
-   ``` 
+Pour toute question ou suggestion, contactez-moi à [your-email@example.com](mailto:your-email@example.com). 
