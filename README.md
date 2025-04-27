@@ -6,7 +6,7 @@ Ce projet a pour objectif de démontrer un flux de travail complet (end-to-end) 
 
 ## 📝 Présentation générale
 
-FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset creditcard.csv. Le projet est découpé en plusieurs modules :
+FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset creditcard.csv. Le projet est découpé en plusieurs modules :
 - **Préparation et gestion des données**
 - **Entraînement et sauvegarde de modèles ML**
 - **Déploiement d'une API Flask pour la prédiction**
@@ -18,41 +18,60 @@ FraudGuard permet de détecter les transactions bancaires frauduleuses à partir
 
 ## 1️⃣ Prérequis
 
-- **Python 3.9** (recommandé)
-- **Git**
-- **Anaconda** (optionnel, pour la gestion d'environnement)
+### Environnement de développement
+- **Python 3.10**
+- **Git** ([Télécharger Git](https://git-scm.com/downloads))
+- **Anaconda** ([Télécharger Anaconda](https://www.anaconda.com/download))
+  - Lors de l'installation, cocher "ajouter anaconda aux variables d'environnement"
 - Comptes sur [GitHub](https://github.com), [Render](https://render.com), et [Streamlit Cloud](https://share.streamlit.io)
 
-### Installation des dépendances
-
-Crée un fichier `requirements.txt` avec les packages nécessaires :
-
+### Dépendances du projet
+Créer un fichier `requirements.txt` avec les packages suivants :
 ```
-numpy
-pandas
-scikit-learn
-matplotlib
-seaborn
-joblib
-streamlit
-Flask
+numpy==1.26.4
+pandas==2.2.3
+scikit-learn==1.6.1
+scipy==1.12.0
+matplotlib==3.10.0
+seaborn==0.13.2
+keras==3.8.0
+jupyterlab==4.3.5
+ipython==8.21.0
+ipykernel==6.29.5
+ipywidgets==8.1.5
+openml==0.15.1
+mlxtend==0.23.4
+imbalanced-learn==0.13.0
+category_encoders==2.8.0
+gdown==5.2.0
+GPy==1.13.2
+graphviz==0.20.3
+streamlit==1.42.1
+Flask==3.1.0
 ```
 
 ---
 
 ## 2️⃣ Mise en place de l'environnement
 
-1. **Créer un environnement virtuel**
+1. **Créer l'environnement Anaconda**
    ```bash
-   python -m venv venv
-   # Windows :
-   venv\Scripts\activate
-   # Mac/Linux :
-   source venv/bin/activate
+   # Si vous n'avez pas déjà créé cet environnement avec anaconda-navigator
+   conda create --name ml python=3.10
+
+   # Activer l'environnement
+   conda activate ml
    ```
+
 2. **Installer les dépendances**
    ```bash
+   # Se placer dans le dossier du projet contenant requirements.txt
    pip install -r requirements.txt
+   ```
+
+3. **En cas de problème avec sklearn et joblib**
+   ```bash
+   pip install --upgrade scikit-learn threadpoolctl joblib
    ```
 
 ---
@@ -122,7 +141,7 @@ fraudguard/
 
 ## 7️⃣ Entraînement des modèles (model/train_model.py)
 
-Le script `train_model.py` permet d'entraîner plusieurs modèles de classification :
+Le script `train_model.py` permet d'entraîner plusieurs modèles de classification :
 - **Chargement et prétraitement des données**
 - **Division en train/test**
 - **Entraînement de trois modèles** :
@@ -132,7 +151,7 @@ Le script `train_model.py` permet d'entraîner plusieurs modèles de classificat
 - **Évaluation et sauvegarde des modèles** (`.pkl`)
 - **Génération des matrices de confusion**
 
-Pour lancer l'entraînement :
+Pour lancer l'entraînement :
 ```bash
 python model/train_model.py
 ```
@@ -146,7 +165,7 @@ python model/train_model.py
 - **Gestion des erreurs et validation des entrées**
 - **Sécurité** : possibilité de restreindre l'accès à l'API via authentification
 
-Pour lancer l'API en local :
+Pour lancer l'API en local :
 ```bash
 python api.py
 ```
@@ -162,7 +181,7 @@ L'API sera disponible sur `http://127.0.0.1:5000`.
 - **Affichage du résultat de la prédiction**
 - **Visualisation des statistiques et matrices de confusion**
 
-Pour lancer l'interface Streamlit :
+Pour lancer l'interface Streamlit :
 ```bash
 streamlit run app.py
 ```
@@ -173,7 +192,7 @@ streamlit run app.py
 
 - **Automatisation de l'entraînement et du commit des modèles**
 - **Déclenchement du déploiement API sur Render**
-- **Fichier de workflow `.github/workflows/ci_cd.yml`**
+- **Fichier de workflow `.github/workflows/ci_cd.yml**
 
 ---
 
