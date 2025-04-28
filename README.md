@@ -182,25 +182,34 @@ streamlit run app.py
 
 ---
 
-## 🔟 Automatisation CI/CD avec GitHub Actions
+# 📊 Comparaison et Analyse des Modèles de Détection de Fraude
 
-- **Automatisation de l'entraînement et du commit des modèles**
-- **Déclenchement du déploiement API sur Render**
-- **Fichier de workflow `.github/workflows/ci_cd.yml**
+## Résultats
+
+| Modèle                | Accuracy | Précision (fraude) | Recall (fraude) | F1-score (fraude) |
+|-----------------------|:---------:|:------------------:|:---------------:|:-----------------:|
+| **LogisticRegression** | 1.00     | 0.83               | 0.64            | 0.72              |
+| **LinearSVC**          | 1.00     | 0.83               | 0.59            | 0.69              |
+| **KNN**                | 1.00     | 0.93               | 0.81            | 0.86              |
 
 ---
 
-## 📊 Comparaison des modèles
+## Analyse
 
-| Modèle                | Accuracy | Précision (fraude) | Recall (fraude) | F1-score (fraude) |
-|-----------------------|----------|--------------------|-----------------|-------------------|
-| **LogisticRegression**| 1.00     | 0.83               | 0.64            | 0.72              |
-| **LinearSVC**         | 1.00     | 0.83               | 0.59            | 0.69              |
-| **KNN**               | 1.00     | 0.93               | 0.81            | 0.86              |
+- **Accuracy** est identique pour tous les modèles (1.00) en raison du déséquilibre du dataset.
+- **Précision**, **Recall** et **F1-score** sont donc des critères plus pertinents pour comparer les performances.
+- **KNN** :
+  - Meilleure précision (0.93) → Moins de fausses alertes de fraude.
+  - Meilleur rappel (0.81) → Détecte plus de fraudes réelles.
+  - Meilleur F1-score (0.86) → Excellent équilibre entre précision et rappel.
 
-- **KNN** offre le meilleur compromis entre précision et rappel pour la détection de fraude.
-- **LogisticRegression** et **LinearSVC** ont une précision élevée mais un rappel plus faible sur la classe fraude.
-- Tous les modèles atteignent une accuracy globale de 1.00 à cause du déséquilibre du dataset.
+---
+
+## 🏆 Conclusion
+
+Le modèle **KNN** est le meilleur choix pour la détection de fraude :  
+il maximise à la fois la **précision**, le **rappel** et le **F1-score**, ce qui est crucial face au déséquilibre du dataset.
+
 
 ---
 
@@ -229,17 +238,3 @@ flowchart TD
 - **`app.py`** : Code de l'application Streamlit.
 - **`database.py`** : Gestion des utilisateurs et de l'authentification.
 - **`requirements.txt`** : Dépendances du projet.
-
----
-
-## 🙏 Remerciements
-
-- **Render** pour l'hébergement de l'API.
-- **Streamlit Cloud** pour l'hébergement de l'app.
-- **GitHub Actions** pour l'automatisation CI/CD.
-
----
-
-## 📧 Contact
-
-Pour toute question ou suggestion, contactez-moi à [your-email@example.com](mailto:your-email@example.com). 
