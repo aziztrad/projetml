@@ -68,12 +68,6 @@ Flask==3.1.0
    # Se placer dans le dossier du projet contenant requirements.txt
    pip install -r requirements.txt
    ```
-
-3. **En cas de problème avec sklearn et joblib**
-   ```bash
-   pip install --upgrade scikit-learn threadpoolctl joblib
-   ```
-
 ---
 
 ## 3️⃣ Initialisation du projet Git
