@@ -1,5 +1,17 @@
 # Projet : Détection de Fraude Bancaire avec FraudGuard
 
+## Présentation générale
+
+FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset creditcard.csv. Le projet est découpé en plusieurs modules :
+- Préparation et gestion des données
+- Entraînement et sauvegarde de modèles ML
+- Déploiement d'une API Flask pour la prédiction
+- Interface utilisateur Streamlit
+- Base de données et authentification
+- Automatisation CI/CD avec GitHub Actions
+
+
+
 ## Architecture du projet
 
 ```mermaid
@@ -17,16 +29,6 @@ flowchart TD
 ```
 
 Ce projet a pour objectif de démontrer un flux de travail complet (end-to-end) pour l'entraînement, le déploiement et l'utilisation d'un système de détection de fraude bancaire basé sur le Machine Learning. Il inclut la gestion des données, l'entraînement de plusieurs modèles, le déploiement d'une API Flask, une interface utilisateur Streamlit, et des fonctionnalités de base de données et d'authentification.
-
-## Présentation générale
-
-FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset creditcard.csv. Le projet est découpé en plusieurs modules :
-- Préparation et gestion des données
-- Entraînement et sauvegarde de modèles ML
-- Déploiement d'une API Flask pour la prédiction
-- Interface utilisateur Streamlit
-- Base de données et authentification
-- Automatisation CI/CD avec GitHub Actions
 
 ## Prérequis
 
