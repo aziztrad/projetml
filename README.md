@@ -2,11 +2,11 @@
 
 ## Présentation générale
 
-FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset creditcard.csv. Le projet est découpé en plusieurs modules :
+FraudGuard permet de détecter les transactions bancaires frauduleuses à partir du dataset [creditcard.csv](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud).  
+Le projet est découpé en plusieurs modules :
 
 - Préparation et gestion des données
 - Entraînement et sauvegarde de modèles ML
-- Déploiement d'une API Flask pour la prédiction
 - Interface utilisateur Streamlit
 - Base de données et authentification
 - Automatisation CI/CD avec GitHub Actions
