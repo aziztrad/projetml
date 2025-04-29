@@ -34,8 +34,8 @@ Ce projet a pour objectif de démontrer un flux de travail complet (end-to-end) 
 ### Environnement de développement
 
 - Python 3.10
-- Git (Télécharger Git)
-- Anaconda (Télécharger Anaconda)
+- Git ([Télécharger Git](https://git-scm.com/downloads))
+- Anaconda ([Télécharger Anaconda](https://www.anaconda.com/products/distribution))
   - Lors de l'installation, cocher "ajouter anaconda aux variables d'environnement"
 - Comptes sur GitHub, Render, et Streamlit Cloud
 
