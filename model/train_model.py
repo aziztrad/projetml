@@ -13,7 +13,7 @@ import os
 
 def load_and_preprocess_data(data_path="data/creditcard.csv", scaler_path="model/scaler.pkl"):
     # Load data
-    print("📥 Chargement des données...")
+    print(" Chargement des données...")
     if not os.path.exists(data_path):
         print(f"Erreur: Le fichier de données {data_path} n'a pas été trouvé.")
         return None, None, None
@@ -29,7 +29,7 @@ def load_and_preprocess_data(data_path="data/creditcard.csv", scaler_path="model
     y = df['Class']
     
     # Scale the features
-    print("⚙️ Préparation et mise à l'échelle des données...")
+    print(" Préparation et mise à l'échelle des données...")
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
     
@@ -37,7 +37,7 @@ def load_and_preprocess_data(data_path="data/creditcard.csv", scaler_path="model
     os.makedirs(os.path.dirname(scaler_path), exist_ok=True)
     
     # Save the scaler
-    print(f"💾 Sauvegarde du scaler -> {scaler_path}")
+    print(f" Sauvegarde du scaler -> {scaler_path}")
     joblib.dump(scaler, scaler_path)
     
     return X_scaled, y, X.columns
@@ -65,7 +65,7 @@ def train_and_evaluate_models(X, y, features):
         trained_models[name] = model
         
         # Evaluate model
-        print(f"📊 Évaluation du modèle: {name}")
+        print(f" Évaluation du modèle: {name}")
         y_pred = model.predict(X_test)
         print("\nRapport de classification:")
         print(classification_report(y_test, y_pred))
@@ -79,7 +79,7 @@ def train_and_evaluate_models(X, y, features):
         plt.xlabel('Classe prédite')
         cm_path = f'model/confusion_matrix_{name}.png'
         plt.savefig(cm_path)
-        print(f"💾 Matrice de confusion sauvegardée -> {cm_path}")
+        print(f" Matrice de confusion sauvegardée -> {cm_path}")
         plt.close()
 
         # Feature importance (only for Logistic Regression)
@@ -98,7 +98,7 @@ def train_and_evaluate_models(X, y, features):
                 plt.tight_layout()
                 fi_path = f'model/feature_importance_{name}.png'
                 plt.savefig(fi_path)
-                print(f"💾 Importance des caractéristiques sauvegardée -> {fi_path}")
+                print(f" Importance des caractéristiques sauvegardée -> {fi_path}")
                 plt.close()
             except Exception as e:
                 print(f"Impossible de générer l'importance des caractéristiques pour {name}: {e}")
@@ -106,7 +106,7 @@ def train_and_evaluate_models(X, y, features):
     return trained_models
 
 def save_models(models, model_dir="model"):
-    print("\n💾 Sauvegarde des modèles entraînés...")
+    print("\n Sauvegarde des modèles entraînés...")
     for name, model in models.items():
         model_path = os.path.join(model_dir, f"{name.lower()}.pkl")
         joblib.dump(model, model_path)
@@ -120,7 +120,7 @@ def main():
     trained_models = train_and_evaluate_models(X, y, features)
     save_models(trained_models)
     
-    print("\n✅ Tous les modèles ont été entraînés et sauvegardés avec succès!")
+    print("\n Tous les modèles ont été entraînés et sauvegardés avec succès!")
 
 if __name__ == "__main__":
     main()
