@@ -85,18 +85,32 @@ def load_transaction_examples():
 
 def login_page():
     """Affiche la page de connexion."""
+<<<<<<< HEAD
     st.title(" Connexion")
     
     with st.form("login_form"):
         username = st.text_input(" Nom d'utilisateur")
         password = st.text_input(" Mot de passe", type="password")
+=======
+    st.title("🔐 Connexion")
+    
+    with st.form("login_form"):
+        username = st.text_input("👤 Nom d'utilisateur")
+        password = st.text_input("🔑 Mot de passe", type="password")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         
         col1, col2 = st.columns(2)
         
         with col1:
+<<<<<<< HEAD
             if st.form_submit_button(" Se connecter", use_container_width=True):
                 if not username or not password:
                     st.error(" Veuillez remplir tous les champs")
+=======
+            if st.form_submit_button("🚪 Se connecter", use_container_width=True):
+                if not username or not password:
+                    st.error("❌ Veuillez remplir tous les champs")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     return
                 
                 try:
@@ -105,6 +119,7 @@ def login_page():
                         st.session_state["username"] = username
                         st.rerun()
                     else:
+<<<<<<< HEAD
                         st.error(" Nom d'utilisateur ou mot de passe incorrect")
                 except Exception as e:
                     logger.error(f"Erreur lors de la connexion: {str(e)}")
@@ -112,29 +127,53 @@ def login_page():
         
         with col2:
             if st.form_submit_button(" S'inscrire", use_container_width=True):
+=======
+                        st.error("❌ Nom d'utilisateur ou mot de passe incorrect")
+                except Exception as e:
+                    logger.error(f"Erreur lors de la connexion: {str(e)}")
+                    st.error("❌ Une erreur est survenue lors de la connexion")
+        
+        with col2:
+            if st.form_submit_button("📝 S'inscrire", use_container_width=True):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                 st.session_state["show_register"] = True
                 st.rerun()
 
 def register_page():
     """Affiche la page d'inscription."""
+<<<<<<< HEAD
     st.title(" Inscription")
     
     if "registration_success" in st.session_state and st.session_state["registration_success"]:
         st.success(" Inscription réussie! Vous pouvez maintenant vous connecter.")
+=======
+    st.title("📝 Inscription")
+    
+    if "registration_success" in st.session_state and st.session_state["registration_success"]:
+        st.success("✅ Inscription réussie! Vous pouvez maintenant vous connecter.")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         time.sleep(2)
         st.session_state["registration_success"] = False
         st.session_state["show_register"] = False
         st.rerun()
     
     with st.form("register_form"):
+<<<<<<< HEAD
         username = st.text_input(" Nom d'utilisateur")
         email = st.text_input("Email")
         password = st.text_input(" Mot de passe", type="password")
         confirm_password = st.text_input("Confirmer le mot de passe", type="password")
+=======
+        username = st.text_input("👤 Nom d'utilisateur")
+        email = st.text_input("📧 Email")
+        password = st.text_input("🔑 Mot de passe", type="password")
+        confirm_password = st.text_input("🔄 Confirmer le mot de passe", type="password")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         
         col1, col2 = st.columns(2)
         
         with col1:
+<<<<<<< HEAD
             if st.form_submit_button(" S'inscrire", use_container_width=True):
                 if not username or not email or not password or not confirm_password:
                     st.error(" Veuillez remplir tous les champs")
@@ -142,17 +181,31 @@ def register_page():
                 
                 if password != confirm_password:
                     st.error(" Les mots de passe ne correspondent pas")
+=======
+            if st.form_submit_button("✅ S'inscrire", use_container_width=True):
+                if not username or not email or not password or not confirm_password:
+                    st.error("❌ Veuillez remplir tous les champs")
+                    return
+                
+                if password != confirm_password:
+                    st.error("❌ Les mots de passe ne correspondent pas")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     return
                 
                 try:
                     if get_user(username):
+<<<<<<< HEAD
                         st.error(" Ce nom d'utilisateur est déjà pris")
+=======
+                        st.error("❌ Ce nom d'utilisateur est déjà pris")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                         return
                     
                     if create_user(username, password, email):
                         st.session_state["registration_success"] = True
                         st.rerun()
                     else:
+<<<<<<< HEAD
                         st.error(" Une erreur est survenue lors de l'inscription")
                 except Exception as e:
                     logger.error(f"Erreur lors de l'inscription: {str(e)}")
@@ -160,6 +213,15 @@ def register_page():
         
         with col2:
             if st.form_submit_button(" Retour à la connexion", use_container_width=True):
+=======
+                        st.error("❌ Une erreur est survenue lors de l'inscription")
+                except Exception as e:
+                    logger.error(f"Erreur lors de l'inscription: {str(e)}")
+                    st.error("❌ Une erreur est survenue lors de l'inscription")
+        
+        with col2:
+            if st.form_submit_button("🔙 Retour à la connexion", use_container_width=True):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                 st.session_state["show_register"] = False
                 st.rerun()
 
@@ -177,7 +239,11 @@ def main():
         init_db()
     except Exception as e:
         logger.error(f"Erreur lors de l'initialisation de la base de données: {str(e)}")
+<<<<<<< HEAD
         st.error(" Erreur de connexion à la base de données")
+=======
+        st.error("❌ Erreur de connexion à la base de données")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         return
 
     # Initialize session state
@@ -206,10 +272,17 @@ def main():
 
     # Vérifier la connexion à l'API
     if not check_api_connection():
+<<<<<<< HEAD
         st.error(" Impossible de se connecter à l'API. Veuillez vérifier que l'API est en cours d'exécution.")
         st.info(" Pour démarrer l'API, ouvrez un terminal et exécutez la commande : `python api.py`")
         
         if st.button(" Se déconnecter"):
+=======
+        st.error("❌ Impossible de se connecter à l'API. Veuillez vérifier que l'API est en cours d'exécution.")
+        st.info("ℹ️ Pour démarrer l'API, ouvrez un terminal et exécutez la commande : `python api.py`")
+        
+        if st.button("🚪 Se déconnecter"):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
             st.session_state.authenticated = False
             st.session_state.username = None
             st.rerun()
@@ -219,12 +292,21 @@ def main():
     st.session_state.available_models = get_available_models()
 
     # Interface principale
+<<<<<<< HEAD
     st.title(" FraudGuard - Détection de Fraude")
     
     # Sidebar
     with st.sidebar:
         st.success(f" Bienvenue, {st.session_state.username}!")
         if st.button(" Se déconnecter", use_container_width=True):
+=======
+    st.title("🛡️ FraudGuard - Détection de Fraude")
+    
+    # Sidebar
+    with st.sidebar:
+        st.success(f"👋 Bienvenue, {st.session_state.username}!")
+        if st.button("🚪 Se déconnecter", use_container_width=True):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
             st.session_state.authenticated = False
             st.session_state.username = None
             st.rerun()
@@ -233,12 +315,20 @@ def main():
         
         # Sélection du modèle
         selected_model = st.selectbox(
+<<<<<<< HEAD
             " Choisir le modèle",
+=======
+            "🤖 Choisir le modèle",
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
             st.session_state.available_models
         )
         
         st.markdown("---")
+<<<<<<< HEAD
         st.markdown("###  Statistiques")
+=======
+        st.markdown("### 📊 Statistiques")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         st.markdown(f"Transactions analysées: {len(st.session_state.transaction_history)}")
         
         if st.session_state.transaction_history:
@@ -249,12 +339,17 @@ def main():
         
         # Option d'upload de CSV
         st.markdown("---")
+<<<<<<< HEAD
         st.markdown("###  Importer des transactions")
+=======
+        st.markdown("### 📁 Importer des transactions")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         uploaded_file = st.file_uploader("Importer un fichier CSV", type="csv")
         if uploaded_file is not None:
             try:
                 df = pd.read_csv(uploaded_file)
                 st.session_state.transaction_examples = df
+<<<<<<< HEAD
                 st.success(f"{len(df)} transactions importées avec succès!")
             except Exception as e:
                 st.error(f"Erreur: {str(e)}")
@@ -265,6 +360,18 @@ def main():
     # Si une transaction a été sélectionnée, passer automatiquement à l'onglet Analyse
     if "active_tab" in st.session_state and st.session_state.active_tab is not None:
         st.info(" Transaction chargée! Utilisez le formulaire d'analyse ci-dessous.")
+=======
+                st.success(f"✅ {len(df)} transactions importées avec succès!")
+            except Exception as e:
+                st.error(f"❌ Erreur: {str(e)}")
+    
+    # Contenu principal
+    tab1, tab2, tab3, tab4 = st.tabs(["🔍 Analyse", "📋 Exemples", "📈 Statistiques", "📋 Historique"])
+    
+    # Si une transaction a été sélectionnée, passer automatiquement à l'onglet Analyse
+    if "active_tab" in st.session_state and st.session_state.active_tab is not None:
+        st.info("✅ Transaction chargée! Utilisez le formulaire d'analyse ci-dessous.")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         st.session_state.active_tab = None
     
     with tab1:
@@ -283,7 +390,11 @@ def main():
                 prefill_data = st.session_state.selected_transaction
             
             amount = st.number_input(
+<<<<<<< HEAD
                 " Montant", 
+=======
+                "💰 Montant", 
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                 min_value=0.0, 
                 value=float(prefill_data.get("Amount", 100.0)), 
                 step=10.0
@@ -334,6 +445,7 @@ def main():
                         
                         # Afficher le résultat
                         if prediction == 1:
+<<<<<<< HEAD
                             st.error(f" Transaction Frauduleuse! (Probabilité: {probability:.2%})")
                         else:
                             st.success(f" Transaction Légitime (Probabilité de fraude: {probability:.2%})")
@@ -349,26 +461,58 @@ def main():
         if st.session_state.transaction_examples.empty:
             st.info(" Aucun exemple de transaction disponible. Importez un fichier CSV d'exemples.")
             if st.button("Générer des exemples"):
+=======
+                            st.error(f"⚠️ Transaction Frauduleuse! (Probabilité: {probability:.2%})")
+                        else:
+                            st.success(f"✅ Transaction Légitime (Probabilité de fraude: {probability:.2%})")
+                    else:
+                        st.error(f"❌ Erreur: {response.text}")
+                except Exception as e:
+                    logger.error(f"Erreur lors de l'analyse: {str(e)}")
+                    st.error("❌ Une erreur est survenue lors de l'analyse")
+    
+    with tab2:
+        st.header("📋 Exemples de Transactions")
+        
+        if st.session_state.transaction_examples.empty:
+            st.info("ℹ️ Aucun exemple de transaction disponible. Importez un fichier CSV d'exemples.")
+            if st.button("📥 Générer des exemples"):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                 try:
                     from generate_transactions_csv import generate_transaction_data
                     df = generate_transaction_data(num_samples=50)
                     df.to_csv(TRANSACTIONS_CSV, index=False)
                     st.session_state.transaction_examples = df
+<<<<<<< HEAD
                     st.success(" Exemples générés avec succès!")
                     st.rerun()
                 except Exception as e:
                     st.error(f" Erreur lors de la génération des exemples: {str(e)}")
+=======
+                    st.success("✅ Exemples générés avec succès!")
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"❌ Erreur lors de la génération des exemples: {str(e)}")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         else:
             # Filtrage
             col1, col2 = st.columns(2)
             with col1:
                 filter_type = st.selectbox(
+<<<<<<< HEAD
                     " Filtrer par type",
+=======
+                    "🔍 Filtrer par type",
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     ["Tous", "Frauduleux", "Légitimes"]
                 )
             with col2:
                 filter_amount = st.slider(
+<<<<<<< HEAD
                     " Montant maximum",
+=======
+                    "💰 Montant maximum",
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     0.0,
                     st.session_state.transaction_examples["Amount"].max(),
                     st.session_state.transaction_examples["Amount"].max(),
@@ -396,7 +540,11 @@ def main():
                 selected_tx_id = selected_transaction_str.split(" - ")[0]
                 
                 # Bouton pour charger la transaction
+<<<<<<< HEAD
                 if st.button(" Charger cette transaction dans le formulaire d'analyse"):
+=======
+                if st.button("📝 Charger cette transaction dans le formulaire d'analyse"):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     selected_row = filtered_df[filtered_df["transaction_id"] == selected_tx_id].iloc[0]
                     
                     features = {}
@@ -409,16 +557,26 @@ def main():
                     st.rerun()
                 
                 # Afficher les cartes de transaction
+<<<<<<< HEAD
                 st.subheader(" Détails des transactions")
                 for i, row in filtered_df.head(10).iterrows():
                     fraud_status = " Frauduleuse" if row["is_fraud"] == 1 else " Légitime"
+=======
+                st.subheader("📋 Détails des transactions")
+                for i, row in filtered_df.head(10).iterrows():
+                    fraud_status = "⚠️ Frauduleuse" if row["is_fraud"] == 1 else "✅ Légitime"
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     
                     expander = st.expander(f"{fraud_status} - {row['transaction_id']} - {row['description']}")
                     with expander:
                         st.write(f"**Montant:** {row['Amount']:.2f}€")
                         st.write(f"**Date:** {row['timestamp']}")
                         
+<<<<<<< HEAD
                         if st.button(f" Analyser cette transaction", key=f"analyze_{i}"):
+=======
+                        if st.button(f"🔍 Analyser cette transaction", key=f"analyze_{i}"):
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                             features = {}
                             for v in range(1, 29):
                                 features[f"V{v}"] = float(row[f"V{v}"])
@@ -430,18 +588,30 @@ def main():
                 
                 # Pagination
                 if len(filtered_df) > 10:
+<<<<<<< HEAD
                     st.info(" Seuls les 10 premiers exemples sont affichés.")
                 
                 # Option d'export
                 st.download_button(
                     "Télécharger les exemples filtrés",
+=======
+                    st.info("ℹ️ Seuls les 10 premiers exemples sont affichés.")
+                
+                # Option d'export
+                st.download_button(
+                    "📥 Télécharger les exemples filtrés",
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                     filtered_df.to_csv(index=False),
                     "transactions_filtrees.csv",
                     "text/csv"
                 )
     
     with tab3:
+<<<<<<< HEAD
         st.header(" Statistiques")
+=======
+        st.header("📈 Statistiques")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
         if st.session_state.transaction_history:
             df = pd.DataFrame(st.session_state.transaction_history)
             
@@ -462,6 +632,7 @@ def main():
             )
             st.plotly_chart(fig2, use_container_width=True)
         else:
+<<<<<<< HEAD
             st.info("Aucune transaction analysée")
     
     with tab4:
@@ -469,6 +640,15 @@ def main():
         if st.session_state.transaction_history:
             df = pd.DataFrame(st.session_state.transaction_history)
             df['Type'] = df['prediction'].map({0: 'Légitime', 1: ' Frauduleuse'})
+=======
+            st.info("ℹ️ Aucune transaction analysée")
+    
+    with tab4:
+        st.header("📋 Historique des Transactions")
+        if st.session_state.transaction_history:
+            df = pd.DataFrame(st.session_state.transaction_history)
+            df['Type'] = df['prediction'].map({0: '✅ Légitime', 1: '⚠️ Frauduleuse'})
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
             
             st.dataframe(
                 df[['timestamp', 'amount', 'Type', 'probability', 'model']].rename(columns={
@@ -483,13 +663,21 @@ def main():
             # Bouton de téléchargement
             csv = df.to_csv(index=False)
             st.download_button(
+<<<<<<< HEAD
                 " Télécharger l'historique",
+=======
+                "📥 Télécharger l'historique",
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
                 csv,
                 "historique_transactions.csv",
                 "text/csv"
             )
         else:
+<<<<<<< HEAD
             st.info("Aucune transaction dans l'historique")
+=======
+            st.info("ℹ️ Aucune transaction dans l'historique")
+>>>>>>> ace65841b854543266a2f96750c89fad4a322316
 
 if __name__ == "__main__":
     main()
